@@ -6,17 +6,20 @@ import json
 import gviz_api
 import time
 
-anchor = 675995779
+anchor = "675995779"
 dataNew = []
 description = {"date": ("number", "Date"), "price0": ("number", "Rent"), "price1": ("number", "Rent"), "price2": ("number", "Rent"), "price3": ("number", "Rent")}
+url1 = "http://polling.3taps.com/poll?auth_token=267b3ec711e58733c1fc2227ca30e555&anchor="
+url2 = "&category=RHFR&location.city=USA-SFO-ATH|USA-SFO-CUP|USA-SFO-LOA|USA-SFO-MEN|USA-SFO-MUA|USA-SFO-PAL|USA-SFO-RED|USA-SFO-STA|USA-SFO-SUN&retvals=timestamp,price,annotations,location"
 
 while True:
-	url = "http://polling.3taps.com/poll?auth_token=267b3ec711e58733c1fc2227ca30e555&anchor=675995779&category=RHFR&location.city=USA-SFO-ATH|USA-SFO-CUP|USA-SFO-LOA|USA-SFO-MEN|USA-SFO-MUA|USA-SFO-PAL|USA-SFO-RED|USA-SFO-STA|USA-SFO-SUN&retvals=timestamp,price,annotations,location"
+#	url = "http://polling.3taps.com/poll?auth_token=267b3ec711e58733c1fc2227ca30e555&anchor=675995779&category=RHFR&location.city=USA-SFO-ATH|USA-SFO-CUP|USA-SFO-LOA|USA-SFO-MEN|USA-SFO-MUA|USA-SFO-PAL|USA-SFO-RED|USA-SFO-STA|USA-SFO-SUN&retvals=timestamp,price,annotations,location"
+	url = url1 + anchor + url2
 	data = urllib2.urlopen(url).read()
 	data = json.loads(data)
 
 	anchor = data['anchor']
-
+	anchor = str(anchor)
 # description = {"date": ("number", "Date"), "price0": ("number", "Rent"), "price1": ("number", "Rent"), "price2": ("number", "Rent"), "price3": ("number", "Rent")}
 
 	i = 0
@@ -47,5 +50,4 @@ while True:
 	dataTable.LoadData(dataNew)
 
 	jsonData = dataTable.ToJSon(columns_order=("date", "price0", "price1", "price2", "price3"), order_by="date")
-
 	time.sleep(28800)

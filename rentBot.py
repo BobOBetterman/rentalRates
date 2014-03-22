@@ -67,5 +67,9 @@ while True:
 
 	f2.close()
 
-	time.sleep(28800)
+#  Let's make the call every three hours:
+	time.sleep(10800)
+
+#  I was making the call every eight hours originally, but I'd rather it catch up to present time faster, and I want to make very sure it keeps ahead of postings, rather than falling behind. It's not like calling eight times a day is going to break their system.
+#	time.sleep(28800)
 #	time.sleep(60)

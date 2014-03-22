@@ -62,8 +62,8 @@ while True:
 
 	jsonData = dataTable.ToJSon(columns_order=("date", "price0", "price1", "price2", "price3"), order_by="date")
 
-#	f2.write(jsonData)
-	json.dump(jsonData, f2)
+	f2.write(jsonData)
+#	json.dump(jsonData, f2)
 
 	f2.close()
 

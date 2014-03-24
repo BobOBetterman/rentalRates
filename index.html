@@ -23,6 +23,12 @@
       // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(jsonData);
 
+//  And here is where I'm going to try to mess about with the legend titles. Good luck to me...
+
+      var options = {
+        }
+      };
+
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.ScatterChart(document.getElementById('visualization'));
       chart.draw(data, {width: 600, height: 400});

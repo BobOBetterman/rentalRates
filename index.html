@@ -26,12 +26,27 @@
 //  And here is where I'm going to try to mess about with the legend titles. Good luck to me...
 
       var options = {
-        }
+          title: 'Rent Prices for Apartments Between Santa Clara and Redwood City',
+          hAxis: {title: 'Date'},
+          vAxis: {
+            title: 'Rental Rates ($/month)',
+//            format: '#, #/1000000'
+          },
+          width: 600,
+          height: 400,
+//          chartArea: {
+//            width: 800,
+//            height: 400
+//            }
+          trendlines: { 0: {visibleInLegend: true}, 1: {visibleInLegend: true}, 2: {visibleInLegend: true}, 3: {visibleInLegend: true} },
+//          dataOpacity: 0.25
+          pointSize: 0.1
       };
 
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.ScatterChart(document.getElementById('visualization'));
-      chart.draw(data, {width: 600, height: 400});
+//      chart.draw(data, {width: 600, height: 400});
+      chart.draw(data, options);
     }
 
       google.setOnLoadCallback(drawVisualization);

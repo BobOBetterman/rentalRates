@@ -6,17 +6,16 @@ import json
 import gviz_api
 import time
 
-anchor = "675995779"
-dataNew = []
+anchor = "616100000"
+#dataNew = []
 description = {"date": ("number", "Date"), "price0": ("number", "0BR Rent"), "price1": ("number", "1BR Rent"), "price2": ("number", "2BR Rent"), "price3": ("number", "3BR Rent")}
 url1 = "http://polling.3taps.com/poll?auth_token=267b3ec711e58733c1fc2227ca30e555&anchor="
 url2 = "&category=RHFR&location.city=USA-SFO-ATH|USA-SFO-CUP|USA-SFO-LOA|USA-SFO-MEN|USA-SFO-MUA|USA-SFO-PAL|USA-SFO-RED|USA-SFO-STA|USA-SFO-SUN&retvals=timestamp,price,annotations,location"
+x = 0
 
-#x = 0
-while True:
-#while x < 2:
+#while True:
+while x < 2:
 #	url = "http://polling.3taps.com/poll?auth_token=267b3ec711e58733c1fc2227ca30e555&anchor=675995779&category=RHFR&location.city=USA-SFO-ATH|USA-SFO-CUP|USA-SFO-LOA|USA-SFO-MEN|USA-SFO-MUA|USA-SFO-PAL|USA-SFO-RED|USA-SFO-STA|USA-SFO-SUN&retvals=timestamp,price,annotations,location"
-#	x = x + 1
 	url = url1 + anchor + url2
 	data = urllib2.urlopen(url).read()
 	data = json.loads(data)
@@ -25,11 +24,19 @@ while True:
 	f2 = open('chartData', 'w')
 #  The next couple lines are for appending the data to the end of the existing file, rather than keeping the whole array in memory for ever. I think I'd like to do this instead, but I have to check to see how Google Charts handles multiple JSON objects first.
 #	f2 = open('chartData', 'a')
-#	dataNew = []
+	dataNew = []
+
+        if x > 0:
+          f3 = open('chartDataRaw', 'r')
+          dataNew = json.load(f3)
+          f3.close()
+
+	x = x + 1
 
 	f1.write(anchor + '\n')
 
 	f1.close()
+        f3 = open('chartDataRaw', 'w')
 
 	anchor = data['anchor']
 	anchor = str(anchor)
@@ -57,6 +64,9 @@ while True:
 
 		i = i + 1
 
+        json.dump(dataNew, f3)
+        f3.close()
+
 	dataTable = gviz_api.DataTable(description)
 	dataTable.LoadData(dataNew)
 
@@ -68,8 +78,8 @@ while True:
 	f2.close()
 
 #  Let's make the call every three hours:
-	time.sleep(10800)
+#	time.sleep(10800)
 
 #  I was making the call every eight hours originally, but I'd rather it catch up to present time faster, and I want to make very sure it keeps ahead of postings, rather than falling behind. It's not like calling eight times a day is going to break their system.
 #	time.sleep(28800)
-#	time.sleep(60)
+	time.sleep(30)

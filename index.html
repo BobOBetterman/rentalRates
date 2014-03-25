@@ -30,17 +30,22 @@
           hAxis: {title: 'Date'},
           vAxis: {
             title: 'Rental Rates ($/month)',
+            viewWindow: {
+              max: 4000,
+              min: 1500
+            }
 //            format: '#, #/1000000'
           },
-          width: 600,
-          height: 400,
+          width: 1800,
+          height: 800,
 //          chartArea: {
 //            width: 800,
 //            height: 400
 //            }
           trendlines: { 0: {visibleInLegend: true}, 1: {visibleInLegend: true}, 2: {visibleInLegend: true}, 3: {visibleInLegend: true} },
 //          dataOpacity: 0.25
-          pointSize: 0.1
+          pointSize: 0.1,
+          explorer: {},
       };
 
       // Instantiate and draw our chart, passing in some options.

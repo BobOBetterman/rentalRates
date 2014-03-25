@@ -48,7 +48,7 @@ while True:
 
             j = j + 1
 
-	x = x + 1
+        x = 1
 
 	f1.write(anchor + '\n')
 

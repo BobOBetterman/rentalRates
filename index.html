@@ -35,6 +35,27 @@
         }
       });
 
+/*
+      This control lets you specify the cities to show on the graph. The numbers corresponding to the cities are:
+      0 = Atherton
+      1 = Cupertino
+      2 = Los Altos
+      3 = Menlo Park
+      4 = Mountain View
+      5 = Palo Alto
+      6 = Redwood City
+      7 = Stanford
+      8 = Sunnyvale
+*/
+
+      var whichCity = new google.visualization.ControlWrapper({
+        'controlType': 'CategoryFilter',
+        'containerId': 'whichCity_div',
+        'options': {
+          'filterColumnIndex': 'city'
+        }
+      });
+
       var rentControl = new google.visualization.ControlWrapper({
         'controlType': 'NumberRangeFilter',
         'containerId': 'rentControl_div',
@@ -61,9 +82,10 @@
           'height': 800,
           /*'trendlines': { 0: {'visibleInLegend': 'true'}, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'} },*/
           'pointSize': 1,
-          'explorer': {},
-          'series': {4: {'pointSize': 0, 'visibleInLegend': 'false'}, 5: {'pointSize': 0, 'visibleInLegend': 'false'}}
-        }
+          'explorer': {}
+//          'series': {4: {'pointSize': 0, 'visibleInLegend': 'false'}, 5: {'pointSize': 0, 'visibleInLegend': 'false'}}
+        },
+        'view': {'columns': [0, 1, 2, 3, 4]}
       });
 
       dashboard.bind(aptSize, scatChart);
@@ -80,6 +102,7 @@
       <!--Divs for charts and controls-->
       <div id="scatChart_id"></div>
       <div id="aptSize_div"></div>
+      <div id="whichCity_div"></div>
       <div id="rentControl_div"></div>
     </div>
   </body>

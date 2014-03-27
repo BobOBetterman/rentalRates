@@ -10,7 +10,7 @@ import datetime
 #  If you get a key error on the anchor = data['anchor'] line below, it's probably because the initial anchor value was too low, and 3taps has already deleted it. Just increase the initial anchor value until the program runs.
 anchor = "624500000"
 #dataNew = []
-description = {"date": ("datetime", "Date"), "price0": ("number", "0BR Rent"), "price1": ("number", "1BR Rent"), "price2": ("number", "2BR Rent"), "price3": ("number", "3BR Rent"), "numBed": ("number", "Number of Bedrooms"), "city": ("number", "City")}
+description = {"date": ("datetime", "Date"), "price0": ("number", "0BR Rent"), "price1": ("number", "1BR Rent"), "price2": ("number", "2BR Rent"), "price3": ("number", "3BR Rent"), "numBed": ("number", "Number of Bedrooms"), "city": ("string", "City")}
 url1 = "http://polling.3taps.com/poll?auth_token=267b3ec711e58733c1fc2227ca30e555&anchor="
 url2 = "&category=RHFR&location.city=USA-SFO-ATH|USA-SFO-CUP|USA-SFO-LOA|USA-SFO-MEN|USA-SFO-MUA|USA-SFO-PAL|USA-SFO-RED|USA-SFO-STA|USA-SFO-SUN&retvals=timestamp,price,annotations,location"
 x = 0
@@ -81,126 +81,126 @@ while True:
 
 				if data['postings'][i]['annotations']['bedrooms'] == 'studio':
                                   if data['postings'][i]['location']['city'] == 'USA-SFO-ATH':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 0})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 0})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Atherton"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Atherton"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-CUP':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 1})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 1})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Cupertino"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Cupertino"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-LOA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 2})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 2})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Los Altos"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Los Altos"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MEN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 3})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 3})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Menlo Park"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Menlo Park"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MUA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 4})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 4})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Mountain View"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Mountain View"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-PAL':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 5})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 5})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Palo Alto"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Palo Alto"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-RED':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 6})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 6})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Redwood City"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Redwood City"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-STA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 7})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 7})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Stanford"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Stanford"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-SUN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": 8})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": 8})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": "Sunnyvale"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": "Sunnyvale"})
 				elif data['postings'][i]['annotations']['bedrooms'] == '1br':
 #				dataNew.append({"date": data['postings'][i]['timestamp'], "price": data['postings'][i]['price'], "bedrooms": data['postings'][i]['annotations']['bedrooms'], "location": data['postings'][i]['location']['city']})
 #					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']).strftime('new Date(%Y, %m, %d, %H, %M, %S)'), "price1": data['postings'][i]['price']})
 #					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": data['postings'][i]['location']['city']})
 #					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": data['postings'][i]['location']['city']})
                                   if data['postings'][i]['location']['city'] == 'USA-SFO-ATH':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 0})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 0})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Atherton"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Atherton"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-CUP':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 1})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 1})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Cupertino"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Cupertino"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-LOA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 2})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 2})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Los Altos"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Los Altos"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MEN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 3})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 3})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Menlo Park"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Menlo Park"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MUA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 4})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 4})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Mountain View"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Mountain View"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-PAL':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 5})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 5})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Palo Alto"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Palo Alto"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-RED':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 6})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 6})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Redwood City"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Redwood City"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-STA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 7})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 7})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Stanford"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Stanford"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-SUN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": 8})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": 8})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": "Sunnyvale"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": "Sunnyvale"})
 				elif data['postings'][i]['annotations']['bedrooms'] == '2br':
 #				dataNew.append({"date": data['postings'][i]['timestamp'], "price": data['postings'][i]['price'], "bedrooms": data['postings'][i]['annotations']['bedrooms'], "location": data['postings'][i]['location']['city']})
 #					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": data['postings'][i]['location']['city']})
 #					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": data['postings'][i]['location']['city']})
                                   if data['postings'][i]['location']['city'] == 'USA-SFO-ATH':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 0})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 0})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Atherton"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Atherton"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-CUP':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 1})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 1})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Cupertino"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Cupertino"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-LOA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 2})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 2})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Los Altos"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Los Altos"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MEN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 3})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 3})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Menlo Park"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Menlo Park"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MUA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 4})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 4})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Mountain View"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Mountain View"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-PAL':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 5})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 5})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Palo Alto"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Palo Alto"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-RED':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 6})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 6})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Redwood City"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Redwood City"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-STA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 7})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 7})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Stanford"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Stanford"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-SUN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": 8})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": 8})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": "Sunnyvale"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": "Sunnyvale"})
 				elif data['postings'][i]['annotations']['bedrooms'] == '3br':
 #				dataNew.append({"date": data['postings'][i]['timestamp'], "price": data['postings'][i]['price'], "bedrooms": data['postings'][i]['annotations']['bedrooms'], "location": data['postings'][i]['location']['city']})
 #					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": data['postings'][i]['location']['city']})
 #					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": data['postings'][i]['location']['city']})
                                   if data['postings'][i]['location']['city'] == 'USA-SFO-ATH':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 0})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 0})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Atherton"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Atherton"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-CUP':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 1})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 1})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Cupertino"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Cupertino"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-LOA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 2})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 2})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Los Altos"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Los Altos"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MEN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 3})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 3})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Menlo Park"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Menlo Park"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-MUA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 4})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 4})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Mountain View"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Mountain View"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-PAL':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 5})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 5})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Palo Alto"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Palo Alto"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-RED':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 6})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 6})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Redwood City"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Redwood City"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-STA':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 7})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 7})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Stanford"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Stanford"})
                                   elif data['postings'][i]['location']['city'] == 'USA-SFO-SUN':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": 8})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": 8})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": "Sunnyvale"})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": "Sunnyvale"})
 
 
 

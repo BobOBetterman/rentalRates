@@ -52,16 +52,60 @@
         'controlType': 'CategoryFilter',
         'containerId': 'whichCity_div',
         'options': {
-          'filterColumnIndex': 'city'
+          'filterColumnLabel': 'City'
         }
       });
 
-      var rentControl = new google.visualization.ControlWrapper({
-        'controlType': 'NumberRangeFilter',
-        'containerId': 'rentControl_div',
+/*
+      This should allow us to set the date range.
+*/
+
+      var dateControl = new google.visualization.ControlWrapper({
+        'controlType': 'DateRangeFilter',
+        'containerId': 'dateControl_div',
         'options': {
-          'filterColumnLabel': '0BR Rent'
+          'filterColumnLabel': 'Date'
         }
+      });
+
+      var rentControl0 = new google.visualization.ControlWrapper({
+        'controlType': 'NumberRangeFilter',
+        'containerId': 'rentControl0_div',
+        'options': {
+          'filterColumnLabel': '0BR Rent',
+          'minValue': 0
+        },
+        'state': {'highValue': 2500}
+      });
+
+      var rentControl1 = new google.visualization.ControlWrapper({
+        'controlType': 'NumberRangeFilter',
+        'containerId': 'rentControl1_div',
+        'options': {
+          'filterColumnLabel': '1BR Rent',
+          'minValue': 0
+        },
+        'state': {'highValue': 4000}
+      });
+
+      var rentControl2 = new google.visualization.ControlWrapper({
+        'controlType': 'NumberRangeFilter',
+        'containerId': 'rentControl2_div',
+        'options': {
+          'filterColumnLabel': '2BR Rent',
+          'minValue': 0
+        },
+        'state': {'highValue': 6000}
+      });
+
+      var rentControl3 = new google.visualization.ControlWrapper({
+        'controlType': 'NumberRangeFilter',
+        'containerId': 'rentControl3_div',
+        'options': {
+          'filterColumnLabel': '3BR Rent',
+          'minValue': 0
+        },
+        'state': {'highValue': 8000}
       });
 
       // Instantiate and draw our chart, passing in some options.
@@ -80,7 +124,7 @@
           },
           'width': 1800,
           'height': 800,
-          /*'trendlines': { 0: {'visibleInLegend': 'true'}, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'} },*/
+         /* 'trendlines': { 0: {'visibleInLegend': 'true'}, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'} },*/
           'pointSize': 1,
           'explorer': {}
 //          'series': {4: {'pointSize': 0, 'visibleInLegend': 'false'}, 5: {'pointSize': 0, 'visibleInLegend': 'false'}}
@@ -88,7 +132,7 @@
         'view': {'columns': [0, 1, 2, 3, 4]}
       });
 
-      dashboard.bind(aptSize, scatChart);
+      dashboard.bind([aptSize, whichCity, dateControl, rentControl0, rentControl1, rentControl2, rentControl3], scatChart);
 
       dashboard.draw(data);
     }
@@ -103,7 +147,11 @@
       <div id="scatChart_id"></div>
       <div id="aptSize_div"></div>
       <div id="whichCity_div"></div>
-      <div id="rentControl_div"></div>
+      <div id="dateControl_div"></div>
+      <div id="rentControl0_div"></div>
+      <div id="rentControl1_div"></div>
+      <div id="rentControl2_div"></div>
+      <div id="rentControl3_div"></div>
     </div>
   </body>
 </html>

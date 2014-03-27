@@ -10,7 +10,7 @@ import datetime
 #  If you get a key error on the anchor = data['anchor'] line below, it's probably because the initial anchor value was too low, and 3taps has already deleted it. Just increase the initial anchor value until the program runs.
 anchor = "624500000"
 #dataNew = []
-description = {"date": ("datetime", "Date"), "price0": ("number", "0BR Rent"), "price1": ("number", "1BR Rent"), "price2": ("number", "2BR Rent"), "price3": ("number", "3BR Rent"), "numBed": ("number", "Number of Bedrooms")}
+description = {"date": ("datetime", "Date"), "price0": ("number", "0BR Rent"), "price1": ("number", "1BR Rent"), "price2": ("number", "2BR Rent"), "price3": ("number", "3BR Rent"), "numBed": ("number", "Number of Bedrooms"), "city": ("string", "City")}
 url1 = "http://polling.3taps.com/poll?auth_token=267b3ec711e58733c1fc2227ca30e555&anchor="
 url2 = "&category=RHFR&location.city=USA-SFO-ATH|USA-SFO-CUP|USA-SFO-LOA|USA-SFO-MEN|USA-SFO-MUA|USA-SFO-PAL|USA-SFO-RED|USA-SFO-STA|USA-SFO-SUN&retvals=timestamp,price,annotations,location"
 x = 0
@@ -38,13 +38,13 @@ while True:
 
           for item in dataOld:
             if 'price0' in dataOld[j]:
-              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price0": dataOld[j]['price0'], "numBed": dataOld[j]['numBed']})
+              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price0": dataOld[j]['price0'], "numBed": dataOld[j]['numBed'], "city": dataOld[j]['city']})
             if 'price1' in dataOld[j]:
-              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price1": dataOld[j]['price1'], "numBed": dataOld[j]['numBed']})
+              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price1": dataOld[j]['price1'], "numBed": dataOld[j]['numBed'], "city": dataOld[j]['city']})
             if 'price2' in dataOld[j]:
-              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price2": dataOld[j]['price2'], "numBed": dataOld[j]['numBed']})
+              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price2": dataOld[j]['price2'], "numBed": dataOld[j]['numBed'], "city": dataOld[j]['city']})
             if 'price3' in dataOld[j]:
-              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price3": dataOld[j]['price3'], "numBed": dataOld[j]['numBed']})
+              dataNew.append({"date": datetime.datetime.utcfromtimestamp(dataOld[j]['date']), "price3": dataOld[j]['price3'], "numBed": dataOld[j]['numBed'], "city": dataOld[j]['city']})
 
             j = j + 1
 
@@ -64,23 +64,24 @@ while True:
 		if data['postings'][i]['price'] > 0:
 
 			if 'bedrooms' in data['postings'][i]['annotations']:
+                          if 'city' in data['postings'][i]['location']:
 
 				if data['postings'][i]['annotations']['bedrooms'] == 'studio':
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price0": data['postings'][i]['price'], "numBed": 0, "city": data['postings'][i]['location']['city']})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price0": data['postings'][i]['price'], "numBed": 0, "city": data['postings'][i]['location']['city']})
 				elif data['postings'][i]['annotations']['bedrooms'] == '1br':
 #				dataNew.append({"date": data['postings'][i]['timestamp'], "price": data['postings'][i]['price'], "bedrooms": data['postings'][i]['annotations']['bedrooms'], "location": data['postings'][i]['location']['city']})
 #					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']).strftime('new Date(%Y, %m, %d, %H, %M, %S)'), "price1": data['postings'][i]['price']})
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price1": data['postings'][i]['price'], "numBed": 1, "city": data['postings'][i]['location']['city']})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price1": data['postings'][i]['price'], "numBed": 1, "city": data['postings'][i]['location']['city']})
 				elif data['postings'][i]['annotations']['bedrooms'] == '2br':
 #				dataNew.append({"date": data['postings'][i]['timestamp'], "price": data['postings'][i]['price'], "bedrooms": data['postings'][i]['annotations']['bedrooms'], "location": data['postings'][i]['location']['city']})
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price2": data['postings'][i]['price'], "numBed": 2, "city": data['postings'][i]['location']['city']})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price2": data['postings'][i]['price'], "numBed": 2, "city": data['postings'][i]['location']['city']})
 				elif data['postings'][i]['annotations']['bedrooms'] == '3br':
 #				dataNew.append({"date": data['postings'][i]['timestamp'], "price": data['postings'][i]['price'], "bedrooms": data['postings'][i]['annotations']['bedrooms'], "location": data['postings'][i]['location']['city']})
-					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3})
-					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3})
+					dataNew.append({"date": datetime.datetime.utcfromtimestamp(data['postings'][i]['timestamp']), "price3": data['postings'][i]['price'], "numBed": 3, "city": data['postings'][i]['location']['city']})
+					dataOld.append({"date": data['postings'][i]['timestamp'], "price3": data['postings'][i]['price'], "numBed": 3, "city": data['postings'][i]['location']['city']})
 
 
 
@@ -92,7 +93,7 @@ while True:
 	dataTable = gviz_api.DataTable(description)
 	dataTable.LoadData(dataNew)
 
-	jsonData = dataTable.ToJSon(columns_order=("date", "price0", "price1", "price2", "price3", "numBed"), order_by="date")
+	jsonData = dataTable.ToJSon(columns_order=("date", "price0", "price1", "price2", "price3", "numBed", "city"), order_by="date")
 
 	f2.write(jsonData)
 #	json.dump(jsonData, f2)

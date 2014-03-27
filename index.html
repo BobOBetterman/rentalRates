@@ -6,9 +6,11 @@
     <script type="text/javascript">
     
     // Load the Visualization API and the piechart package.
-    google.load('visualization', '1', {'packages':['corechart']});
+    google.load('visualization', '1', {'packages':['controls']});
+
+    google.setOnLoadCallback(drawDashboard);
       
-    function drawVisualization() {
+    function drawDashboard() {
 
 //      var jsonData = {"rows":[{"c":[{"v":1394642972},null,null,null,{"v":2995.0}]},{"c":[{"v":1394643052},null,null,{"v":3272.0},null]},{"c":[{"v":1394643414},null,{"v":2195.0},null,null]},{"c":[{"v":1394644512},null,{"v":1889.0},null,null]},{"c":[{"v":1394644786},null,null,{"v":3497.0},null]},{"c":[{"v":1394644899},null,{"v":2866.0},null,null]}],"cols":[{"type":"number","id":"date","label":"Date"},{"type":"number","id":"price0","label":"Rent"},{"type":"number","id":"price1","label":"Rent"},{"type":"number","id":"price2","label":"Rent"},{"type":"number","id":"price3","label":"Rent"}]}
 
@@ -23,44 +25,62 @@
       // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(jsonData);
 
-//  And here is where I'm going to try to mess about with the legend titles. Good luck to me...
+      var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 
-      var options = {
-          title: 'Rent Prices for Apartments Between Santa Clara and Redwood City',
-          hAxis: {title: 'Date'},
-          vAxis: {
-            title: 'Rental Rates ($/month)',
-            viewWindow: {
-              max: 4000,
-              min: 1500
-            }
-//            format: '#, #/1000000'
-          },
-          width: 1800,
-          height: 800,
-//          chartArea: {
-//            width: 800,
-//            height: 400
-//            }
-          trendlines: { 0: {visibleInLegend: true}, 1: {visibleInLegend: true}, 2: {visibleInLegend: true}, 3: {visibleInLegend: true} },
-//          dataOpacity: 0.25
-          pointSize: 0.1,
-          explorer: {},
-      };
+      var aptSize = new google.visualization.ControlWrapper({
+        'controlType': 'CategoryFilter',
+        'containerId': 'aptSize_div',
+        'options': {
+          'filterColumnLabel': 'Number of Bedrooms'
+        }
+      });
+
+      var rentControl = new google.visualization.ControlWrapper({
+        'controlType': 'NumberRangeFilter',
+        'containerId': 'rentControl_div',
+        'options': {
+          'filterColumnLabel': '0BR Rent'
+        }
+      });
 
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ScatterChart(document.getElementById('visualization'));
-//      chart.draw(data, {width: 600, height: 400});
-      chart.draw(data, options);
-    }
+      var scatChart = new google.visualization.ChartWrapper({
+        'chartType': 'ScatterChart',
+        'containerId': 'scatChart_id',
+        'options': {
+          'title': 'Rent Prices for Apartments Between Santa Clara and Redwood City',
+          'hAxis': {'title': 'Date'},
+          'vAxis': {
+            'title': 'Rental Rates ($/month)',
+//            'viewWindow': {
+//              'max': 4000,
+//              'min': 1500
+//            }
+          },
+          'width': 1800,
+          'height': 800,
+          /*'trendlines': { 0: {'visibleInLegend': 'true'}, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'} },*/
+          'pointSize': 1,
+          'explorer': {},
+          'series': {4: {'pointSize': 0, 'visibleInLegend': 'false'}}
+        }
+      });
 
-      google.setOnLoadCallback(drawVisualization);
+      dashboard.bind(aptSize, scatChart);
+
+      dashboard.draw(data);
+    }
 
     </script>
   </head>
 
   <body>
-    <!--Div that will hold the pie chart-->
-    <div id="visualization"></div>
+    <!--Div that will hold the dashboard-->
+    <div id="dashboard_div">
+      <!--Divs for charts and controls-->
+      <div id="scatChart_id"></div>
+      <div id="aptSize_div"></div>
+      <div id="rentControl_div"></div>
+    </div>
   </body>
 </html>

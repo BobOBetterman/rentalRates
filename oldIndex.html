@@ -1,0 +1,66 @@
+<html>
+  <head>    
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+      
+    function drawVisualization() {
+
+//      var jsonData = {"rows":[{"c":[{"v":1394642972},null,null,null,{"v":2995.0}]},{"c":[{"v":1394643052},null,null,{"v":3272.0},null]},{"c":[{"v":1394643414},null,{"v":2195.0},null,null]},{"c":[{"v":1394644512},null,{"v":1889.0},null,null]},{"c":[{"v":1394644786},null,null,{"v":3497.0},null]},{"c":[{"v":1394644899},null,{"v":2866.0},null,null]}],"cols":[{"type":"number","id":"date","label":"Date"},{"type":"number","id":"price0","label":"Rent"},{"type":"number","id":"price1","label":"Rent"},{"type":"number","id":"price2","label":"Rent"},{"type":"number","id":"price3","label":"Rent"}]}
+
+      var jsonData = $.ajax({
+        url: "getData.php",
+        dataType: "json",
+        async: false
+        }) .responseText;
+
+//      console.log(jsonData);
+
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(jsonData);
+
+//  And here is where I'm going to try to mess about with the legend titles. Good luck to me...
+
+      var options = {
+          title: 'Rent Prices for Apartments Between Santa Clara and Redwood City',
+          hAxis: {title: 'Date'},
+          vAxis: {
+            title: 'Rental Rates ($/month)',
+            viewWindow: {
+              max: 4000,
+              min: 1500
+            }
+//            format: '#, #/1000000'
+          },
+          width: 1800,
+          height: 800,
+//          chartArea: {
+//            width: 800,
+//            height: 400
+//            }
+          trendlines: { 0: {visibleInLegend: true}, 1: {visibleInLegend: true}, 2: {visibleInLegend: true}, 3: {visibleInLegend: true} },
+//          dataOpacity: 0.25
+          pointSize: 0.1,
+          explorer: {},
+      };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ScatterChart(document.getElementById('visualization'));
+//      chart.draw(data, {width: 600, height: 400});
+      chart.draw(data, options);
+    }
+
+      google.setOnLoadCallback(drawVisualization);
+
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="visualization"></div>
+  </body>
+</html>

@@ -31,7 +31,7 @@
         'controlType': 'CategoryFilter',
         'containerId': 'aptSize_div',
         'options': {
-          'filterColumnLabel': 'Date'
+          'filterColumnLabel': 'Number of Bedrooms'
         }
       });
 
@@ -59,9 +59,10 @@
           },
           'width': 1800,
           'height': 800,
-          'trendlines': { 0: {'visibleInLegend': 'true'}/*, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'}*/ },
+          /*'trendlines': { 0: {'visibleInLegend': 'true'}, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'} },*/
           'pointSize': 1,
-          'explorer': {}
+          'explorer': {},
+          'series': {4: {'pointSize': 0, 'visibleInLegend': 'false'}}
         }
       });
 

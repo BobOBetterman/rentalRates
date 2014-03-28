@@ -75,7 +75,7 @@
           'filterColumnLabel': '0BR Rent',
           'minValue': 0
         },
-        'state': {'highValue': 2500}
+        'state': {'highValue': 2500},
       });
 
       var rentControl1 = new google.visualization.ControlWrapper({
@@ -124,7 +124,7 @@
           },
           'width': 1800,
           'height': 800,
-         /* 'trendlines': { 0: {'visibleInLegend': 'true'}, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'} },*/
+          'trendlines': { 0: {'visibleInLegend': 'true'}, 1: {'visibleInLegend': 'true'}, 2: {'visibleInLegend': 'true'}, 3: {'visibleInLegend': 'true'} },
           'pointSize': 1,
           'explorer': {}
 //          'series': {4: {'pointSize': 0, 'visibleInLegend': 'false'}, 5: {'pointSize': 0, 'visibleInLegend': 'false'}}
@@ -132,9 +132,117 @@
         'view': {'columns': [0, 1, 2, 3, 4]}
       });
 
+      function changeSize() {
+        var numApts = aptSize.getState();
+        redrawChart(numApts);
+      }
+
+      function redrawChart(numApts) {
+//        console.log(numApts);
+
+        if (numApts.selectedValues[0] == 0 || numApts.selectedValues[1] == 0 || numApts.selectedValues[2] == 0 || numApts.selectedValues[3] == 0) { 
+          var a = true;
+        }
+        if (numApts.selectedValues[0] == 1 || numApts.selectedValues[1] == 1 || numApts.selectedValues[2] == 1 || numApts.selectedValues[3] == 1) { 
+          var b = true;
+        }
+        if (numApts.selectedValues[0] == 2 || numApts.selectedValues[1] == 2 || numApts.selectedValues[2] == 2 || numApts.selectedValues[3] == 2) { 
+          var c = true;
+        }
+        if (numApts.selectedValues[0] == 3 || numApts.selectedValues[1] == 3 || numApts.selectedValues[2] == 3 || numApts.selectedValues[3] == 3) { 
+          var d = true;
+        }
+
+        if (a && b && c && d) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 1: {'visibleInLegend': true}, 2: {'visibleInLegend': true}, 3: {'visibleInLegend': true} });
+          scatChart.draw();
+        }
+
+        else if (a && b && c) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 1: {'visibleInLegend': true}, 2: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (a && b && d) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 1: {'visibleInLegend': true}, 3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (a && d && c) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 2: {'visibleInLegend': true}, 3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (d && b && c) {
+          scatChart.setOption('trendlines', {1: {'visibleInLegend': true}, 2: {'visibleInLegend': true}, 3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (a && b) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 1: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (a && c) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 2: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (a && d) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (b && c) {
+          scatChart.setOption('trendlines', {1: {'visibleInLegend': true}, 2: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (b && d) {
+          scatChart.setOption('trendlines', {1: {'visibleInLegend': true}, 3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (c && d) {
+          scatChart.setOption('trendlines', {2: {'visibleInLegend': true}, 3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (a) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (b) {
+          scatChart.setOption('trendlines', {1: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (c) {
+          scatChart.setOption('trendlines', {2: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else if (d) {
+          scatChart.setOption('trendlines', {3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+
+        else {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}, 1: {'visibleInLegend': true}, 2: {'visibleInLegend': true}, 3: {'visibleInLegend': true} });
+          scatChart.draw();
+        }
+
+//        alert('Studios selected? ' + a);
+      }
+
       dashboard.bind([aptSize, whichCity, dateControl, rentControl0, rentControl1, rentControl2, rentControl3], scatChart);
 
+//      google.visualization.events.addListener(aptSize, 'statechange', changeSize);
+
       dashboard.draw(data);
+
+      google.visualization.events.addListener(aptSize, 'statechange', changeSize);
     }
 
     </script>

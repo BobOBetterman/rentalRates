@@ -68,6 +68,12 @@
         }
       });
 
+//      var dateVal = dateControl.getOption(maxValue);
+//      console.log(dateVal);
+//      var dateValLow = dateVal.highValue;
+//      console.log(dateValLow);
+//      dateControl.setOption('lowValue', dateValLow);
+
       var rentControl0 = new google.visualization.ControlWrapper({
         'controlType': 'NumberRangeFilter',
         'containerId': 'rentControl0_div',
@@ -113,7 +119,7 @@
         'chartType': 'ScatterChart',
         'containerId': 'scatChart_id',
         'options': {
-          'title': 'Rent Prices for Apartments Between Santa Clara and Redwood City',
+          'title': 'Rent Prices for Apartments Between Sunnyvale and Redwood City',
           'hAxis': {'title': 'Date'},
           'vAxis': {
             'title': 'Rental Rates ($/month)',
@@ -136,6 +142,32 @@
         var numApts = aptSize.getState();
         redrawChart(numApts);
       }
+
+      function changeRent0() {
+        var rent0 = rentControl0.getState();
+        var lowRent0 = rent0.lowValue;
+//        console.log(lowRent0);
+        redrawChart0(lowRent0);
+      }
+
+      function changeRent1() {
+        var rent1 = rentControl1.getState();
+        var lowRent1 = rent1.lowValue;
+        redrawChart1(lowRent1);
+      }
+
+      function changeRent2() {
+        var rent2 = rentControl2.getState();
+        var lowRent2 = rent2.lowValue;
+        redrawChart2(lowRent2);
+      }
+
+      function changeRent3() {
+        var rent3 = rentControl3.getState();
+        var lowRent3 = rent3.lowValue;
+        redrawChart3(lowRent3);
+      }
+
 
       function redrawChart(numApts) {
 //        console.log(numApts);
@@ -236,6 +268,34 @@
 //        alert('Studios selected? ' + a);
       }
 
+      function redrawChart0(lowRent0) {
+        if (lowRent0 > 0) {
+          scatChart.setOption('trendlines', {0: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+      }
+
+      function redrawChart1(lowRent1) {
+        if (lowRent1 > 0) {
+          scatChart.setOption('trendlines', {1: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+      }
+
+      function redrawChart2(lowRent2) {
+        if (lowRent2 > 0) {
+          scatChart.setOption('trendlines', {2: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+      }
+
+      function redrawChart3(lowRent3) {
+        if (lowRent3 > 0) {
+          scatChart.setOption('trendlines', {3: {'visibleInLegend': true}});
+          scatChart.draw();
+        }
+      }
+
       dashboard.bind([aptSize, whichCity, dateControl, rentControl0, rentControl1, rentControl2, rentControl3], scatChart);
 
 //      google.visualization.events.addListener(aptSize, 'statechange', changeSize);
@@ -243,6 +303,10 @@
       dashboard.draw(data);
 
       google.visualization.events.addListener(aptSize, 'statechange', changeSize);
+      google.visualization.events.addListener(rentControl0, 'statechange', changeRent0);
+      google.visualization.events.addListener(rentControl1, 'statechange', changeRent1);
+      google.visualization.events.addListener(rentControl2, 'statechange', changeRent2);
+      google.visualization.events.addListener(rentControl3, 'statechange', changeRent3);
     }
 
     </script>
